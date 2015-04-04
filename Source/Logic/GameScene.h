@@ -38,11 +38,14 @@
 #define WAVE_X 5.0
 #define WAVE_Y 2.5
 
+
+		
 /*
 *	This is the In-game Scene where all round-events occur.
 */
 class GameScene : public Scene
 {
+	
 	public:
 		GameScene();
 		virtual void update(sf::Time);
@@ -55,12 +58,27 @@ class GameScene : public Scene
 
 		void addKeyListener(KeyListener* listener);
 		void rmKeyListener(KeyListener* listener);
+		
+		struct btnStatus
+		{
+			GUI::Button* btn;
+			int coolDown = 0;
+		} bs[3];
 
   	void generateMap(int seed);
 		void generateWater();
 		void generateUI();
 		void positionUI();
 		void setPlayerVessel(Vessel *vessel);
+
+		void checkBtns(sf::Time);
+		void setUI();
+		/*void onClickDemiseThree();
+		void onClickDemiseTwo();
+		void onClickDemiseOne();
+		void onClickVitalityThree();
+		void onClickVitalityTwo();
+		void onClickVitalityOne();*/
 
 	private:
 		/**
@@ -126,9 +144,11 @@ class GameScene : public Scene
 		GUI::TextBox *tb;
 		GUI::HealthBar *hb;
 		GUI::TextBox *levelInd;
+		sf::Vector2f butSize;
 
 		PLAYER_MODE characterType;
 		int classType;
+	
 };
 
 #endif
